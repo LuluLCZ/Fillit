@@ -6,11 +6,12 @@
 /*   By: llacaze <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 17:16:37 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/08 18:40:54 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/09 11:29:49 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_includes.c"
+#include "ft_erreurs.c"
 
 /* On va copier le buf dans une string en enlevant les '\n' pour pouvoir tout
  * lire en une seule ligne et reussir a determiner la forme du tetrimino
