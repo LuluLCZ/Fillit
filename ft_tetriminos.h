@@ -6,12 +6,15 @@
 /*   By: llacaze <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 18:05:52 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/09 18:07:21 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/09 19:14:57 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_TETRIMINOS_H
 # define FT_TETRIMINOS_H
 # define S1 "#...#..##"
+# define S5 "#.###"
+# define S8 "##.##"
+# define S9 "#..##..#"
 
 #endif

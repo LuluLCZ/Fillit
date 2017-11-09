@@ -6,15 +6,18 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:33:25 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/09 18:11:33 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/09 20:15:51 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_includes.c"
 #include "ft_tetriminos.h"
 #include "ft_tetriminos.c"
+#include "ft_split.c"
 
-static char		*ft_tetriminos(char *str);
+static char		*ft_split(char *str);
+
+static char		*ft_test_tetri(char *str);
 
 char	*ft_strdup(const char *src);
 
@@ -74,7 +77,7 @@ static char		*ft_split_nl(char *str)
 	j = 0;
 	i = 0;
 //	count_char = ft_count_place(fd);
-	if (!(new_str = (char *)malloc(sizeof(char) * 50)))
+	if (!(new_str = (char *)malloc(sizeof(char) * 5000)))
 		return (NULL);
 	while (str[i] != '\n' && str[i] != '\0')
 	{
@@ -133,7 +136,7 @@ static char		*ft_split_first_points(char *str)
 		return (NULL);
 	while (str[i] == '.' && str[i] != '#')
 		i++;
-	while (i < 20 && hash < 4)
+	while (i < 25 && hash < 4)
 	{
 		//while (str[i] == '.' && i < 4)
 		//	i++;
@@ -151,9 +154,12 @@ static char		*ft_split_first_points(char *str)
 
 int		main(int ac, char **av)
 {
+	char	*str;
 	int		fd;
 	//(void)ft_count_place;
 
+	if (!(str = (char *)malloc(sizeof(char) * 50000)))
+		return (0);
 	fd = open(av[1], O_RDWR);
 	if (ac != 2)
 		return (0);
@@ -161,8 +167,14 @@ int		main(int ac, char **av)
 //	printf("%s", ft_buf_to_str(fd));
 //	printf("%s", ft_split_nl(ft_buf_to_str(fd)));
 //	printf("%s", ft_split_first_points(ft_split_nl(ft_buf_to_str(fd))));
-	printf("%s", ft_tetriminos(ft_split_first_points(ft_split_nl(ft_buf_to_str(fd)))));
+//	printf("%s", ft_test_tetri(ft_split_first_points(ft_split_nl(ft_buf_to_str(fd)))));
 //	printf("%s", ft_split_first_points(ft_split_four(ft_split_nl(ft_buf_to_str(fd)))));
+	str = ft_buf_to_str(fd);
+	str = ft_split_nl(str);
+	str = ft_split_first_points(str);
+	str = ft_test_tetri(str);
+	printf("%s", ft_split(str));
+//	printf("%s", ft_split(ft_test_tetri(ft_split_first_points(ft_split_nl(ft_buf_to_str(fd))))));
 	close(fd);
 	return (0);
 }
