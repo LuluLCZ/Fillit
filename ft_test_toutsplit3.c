@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tetriminos.h                                    :+:      :+:    :+:   */
+/*   ft_test_toutsplit3.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llacaze <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 18:05:52 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/10 14:14:17 by llacaze          ###   ########.fr       */
+/*   Created: 2017/11/10 14:14:32 by llacaze           #+#    #+#             */
+/*   Updated: 2017/11/10 14:16:17 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TETRIMINOS_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# define FT_TETRIMINOS_H
-# define S1 "#...#..##"
-# define S5 "#.###"
-# define S8 "##.##"
-# define S9 "#..##..#"
+#include <ft_tetriminos.h>
+#include "ft_test_tout3.c"
 
-typedef struct		s_tetris
+static char		**ft_test_toutsplit3(char **tab)
 {
-	void				*content;
-	size_t				content_size;
-	struct s_tetris		*next;
-}					t_tetris;
+	int		i;
+	int		j;
 
-#endif
+	i = 0;
+	j = 0;
+	while (tab[j][i] != '\n' && tab[j][i] != '\0')
+	{
+		i++;
+		if (tab[j][i] == '\n')
+	}
+}
