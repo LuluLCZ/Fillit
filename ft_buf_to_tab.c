@@ -6,14 +6,14 @@
 /*   By: llacaze <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:23:12 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/10 13:31:54 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/10 17:30:18 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_tetriminos.h"
-#include "../../Projets/Libft/ft_strsub.c"
-#include "../../Projets/Libft/ft_strlen.c"
 #include "../../Projets/Libft/ft_strcmp.c"
+#include "ft_strsplit_fillit.c"
+#include "ft_strtrimfillit.c"
 
 static char		*ft_buf_to_str(int fd)
 {
@@ -66,6 +66,8 @@ static char		**ft_str_to_tab(char *str)
 	return (new_str);
 }
 
+/* On va utiliser ca pour savoir si c'est un tetrimino valide avant tout, 
+ * pour plus tard;
 char	*ft_str_cmp(char **tab)
 {
 	int		i;
@@ -76,20 +78,57 @@ char	*ft_str_cmp(char **tab)
 	write(2, "erreur", 7);
 	return (NULL);
 }
+*/
+
+static char		**ft_str_split_nl(char **tab)
+{
+	char	**new_tab;
+	char	*str;
+	size_t		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	k = 0;
+	j = 0;
+	if (!(str = (char *)malloc(sizeof(char) * 21)))
+		return (NULL);
+	if (!(new_tab = (char **)malloc(sizeof(char *) * 21)))
+		return (NULL);
+	while (tab[j])
+	{
+		i = 0;
+		k = 0;
+		while (tab[j][i] != '\n' && tab[j][i] != '\0')
+		{
+			str[k] = tab[j][i];
+			i++;
+			k++;
+			if (tab[j][i] == '\n')
+				i++;
+		}
+		new_tab[j++] = ft_strsub(str, 0, ft_strlen(str));
+	}
+	return (new_tab);
+}
 
 int		main(int ac, char **av)
 {
 	if (ac != 2)
 		return (0);
 	char	**ret;
-	char	*new_ret;
+	char	**new_ret;
 	int		fd;
 	int		index;
 
 	index = 0;
 	fd = open(av[1], O_RDONLY);
 	ret = ft_str_to_tab(ft_buf_to_str(fd));
-	new_ret = ft_str_cmp(ret);
-	printf("%s", new_ret);
+	new_ret = ft_str_split_nl(ret);
+	while (ret[index])
+	{
+		printf("%s\n", new_ret[index]);
+		index++;
+	}
 	return (0);
 }
