@@ -6,7 +6,7 @@
 /*   By: llacaze <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:00:39 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/11 19:50:17 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/12 17:10:50 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char		**ft_split_dots(char **tab)
 	j = 0;
 	i = 0;
 	start = 0;
-	if (!(new_tab = (char **)malloc(sizeof(char *) * 20)))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * 5000)))
 		return (NULL);
 	while (tab[j])
 	{

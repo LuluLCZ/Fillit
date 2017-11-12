@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:52:27 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/11 20:27:03 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/12 18:55:33 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static int		check_tetriminos(char *str)
 	i = 0;
 	newline = 0;
 	sharp = 0;
-	if (str[4] != '\n' || str[9] != '\n' || str[14] != '\n' || str[19] != '\n')
+	if (str[4] != '\n' || str[9] != '\n' || str[14] != '\n' || str[19] != '\n' || 
+			!str || !*str)
 	{
 		write(1, "Map non valde", 15);
 		exit(EXIT_FAILURE);
@@ -56,11 +57,11 @@ static int		check_tetriminos(char *str)
 		if (str[i] == '#')
 			sharp++;
 		i++;
-		write(1, "r", 1);
+		//write(1, "r", 1);
 	}
 	if (newline == 4 && sharp == 4 && str[19] == '\n' && !str[20])
 		return (1);
-	write(1, "Mou", 3);
+	write(1, "Map non valide", 14);
 	exit(EXIT_FAILURE);
 	return (0);
 }
@@ -75,9 +76,9 @@ static int		ft_tab_check_tetri(char **tab)
 	while (tab[j])
 	{
 
-		write(1, "p", 1);
+		//write(1, "p", 1);
 		i = check_tetriminos(tab[j]);
-		write(1, "q", 1);
+		//write(1, "q", 1);
 		if (i == 1)
 		{
 			write(1, "Map valide\n", 11);
@@ -85,7 +86,7 @@ static int		ft_tab_check_tetri(char **tab)
 		}
 		else
 		{
-			write(1, "Tetrimino non valide\n", 21);
+			write(1, "Map non valide\n", 15);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -109,8 +110,29 @@ static void		ft_erreurs(char **tab)
 		}
 		else
 		{
-			write(1, "Tetrimino non valide", 20);
+			write(1, "Tetrimino non valide\n", 21);
 			j++;
 		}
 	}
+}
+
+static int		ft_check_backslash(char **tab)
+{
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	j = 0;
+	while (tab[j])
+		j++;
+	j = j - 1;
+	while (tab[j][i])
+		i++;
+	i = i - 1;
+	if (tab[j][i - 2] != '#' && tab[j][i - 2] != '.')
+	{
+		write(1, "Mauvaise map", 12);
+		exit(EXIT_FAILURE);
+	}
+	return (1);
 }

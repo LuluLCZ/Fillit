@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:23:12 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/11 20:26:51 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/12 18:56:00 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ static char		**ft_str_to_tab(char *str)
 	i = 0;
 	k = 0;
 	j = 0;
-	if (!(new_str = (char **)malloc(sizeof(char *) * 25)))
+	if (!(new_str = (char **)malloc(sizeof(char *) * (ft_strlen(str) + 13))))
 		return (NULL);
 	while (i < ft_strlen(str))
 	{
 		new_str[j] = ft_strsub(str, i, 20);
-		printf("%s", new_str[j]);
-		write(1, "a", 1);
+	//	printf("%s", new_str[j]);
+		//write(1, "a", 1);
 		j++;
 		i = i + 21;
 		/*if (i == 0)
@@ -103,9 +103,9 @@ static char		**ft_str_split_nl(char **tab)
 	i = 0;
 	k = 0;
 	j = 0;
-	if (!(str = (char *)malloc(sizeof(char) * 21)))
+	if (!(str = (char *)malloc(sizeof(char) * 5000)))
 		return (NULL);
-	if (!(new_tab = (char **)malloc(sizeof(char *) * 50)))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * 5000)))
 		return (NULL);
 	while (tab[j])
 	{
@@ -116,7 +116,7 @@ static char		**ft_str_split_nl(char **tab)
 			str[k] = tab[j][i];
 			i++;
 			k++;
-			if (tab[j][i] == '\n' && tab[j][i])
+			while (tab[j][i] == '\n')
 				i++;
 		}
 		new_tab[j++] = ft_strsub(str, 0, ft_strlen(str));
@@ -129,7 +129,8 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	char	**ret;
-	//char	**new_ret;
+	char	**new_ret;
+	char	*str;
 	int		fd;
 	int		index;
 	int		i;
@@ -137,20 +138,26 @@ int		main(int ac, char **av)
 	i = 0;
 	index = 0;
 	fd = open(av[1], O_RDONLY);
+
 	ret = ft_str_to_tab(ft_buf_to_str(fd));
+	if (i != 1)
+		write(1, "b", 1);
 	i = ft_tab_check_tetri(ret);
-	if (i == 0)
+	if (i != 1)
 	{
 		write(1, "a", 1);
 		exit(EXIT_FAILURE);
 	}
-	//new_ret = ft_str_split_nl(ret);
-	//new_ret = ft_split_dots(new_ret);
-	//ft_erreurs(new_ret);
+	new_ret = ft_str_split_nl(ret);
+	new_ret = ft_split_dots(new_ret);
+	ft_erreurs(new_ret);
+	i = ft_check_backslash(ft_str_to_tab(ft_buf_to_str(fd)));
+	printf("%d", i);
 	while (ret[index])
 	{
+		write(1, "n", 1);
 		printf("%s", ret[index]);
-		//printf("%s\n", new_ret[index]);
+		printf("%s\n", new_ret[index]);
 		index++;
 	}
 	return (0);
