@@ -129,7 +129,7 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	char	**ret;
-	//char	**new_ret;
+	char	**new_ret;
 	int		fd;
 	int		index;
 	int		i;
@@ -144,14 +144,14 @@ int		main(int ac, char **av)
 		write(1, "a", 1);
 		exit(EXIT_FAILURE);
 	}
-	//new_ret = ft_str_split_nl(ret);
-	//new_ret = ft_split_dots(new_ret);
-	//ft_erreurs(new_ret);
-	while (ret[index])
-	{
-		printf("%s", ret[index]);
+	new_ret = ft_str_split_nl(ret);
+	new_ret = ft_split_dots(new_ret);
+	ft_erreurs(new_ret);
+	//while (ret[index])
+	//{
+	//	printf("%s", ret[index]);
 		//printf("%s\n", new_ret[index]);
-		index++;
-	}
+	//	index++;
+	//}
 	return (0);
 }

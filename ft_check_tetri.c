@@ -56,10 +56,11 @@ static int		check_tetriminos(char *str)
 		if (str[i] == '#')
 			sharp++;
 		i++;
+		write(1, "r", 1);
 	}
 	if (newline == 4 && sharp == 4 && str[19] == '\n' && !str[20])
 		return (1);
-	write(1, "M", 1);
+	write(1, "Mou", 3);
 	exit(EXIT_FAILURE);
 	return (0);
 }
@@ -71,9 +72,12 @@ static int		ft_tab_check_tetri(char **tab)
 
 	j = 0;
 	i = 0;
-	while (tab[j] != NULL)
+	while (tab[j])
 	{
+
+		write(1, "p", 1);
 		i = check_tetriminos(tab[j]);
+		write(1, "q", 1);
 		if (i == 1)
 		{
 			write(1, "Map valide\n", 11);
