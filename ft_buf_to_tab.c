@@ -6,18 +6,20 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:23:12 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/12 18:56:00 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/13 19:36:53 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_tetriminos.h"
-#include "../Libft/ft_strcmp.c"
-#include "../Libft/ft_strsub.c"
-#include "../Libft/ft_strlen.c"
-#include "ft_splitdots_tab.c"
-#include "ft_check_tetri.c"
+#include "CheckMap/ft_tetriminos.h"
+//#include "ft_tab_to_list.c"
+#include "CheckMap/Libft/ft_strcmp.c"
+#include "CheckMap/Libft/ft_strsub.c"
+#include "CheckMap/Libft/ft_strlen.c"
+#include "CheckMap/ft_splitdots_tab.c"
+#include "CheckMap/ft_check_tetri.c"
+//#include "Libft/ft_strnew.c"
 
-static int		ft_check_valide(char *str);
+/*static int		ft_check_valide(char *str);
 
 static void		ft_erreurs(char **tab);
 
@@ -26,7 +28,7 @@ static int		check_tetriminos(char *str);
 static int		ft_end_sharp(char *tab);
 
 static char		**ft_split_dots(char **tab);
-
+*/
 static char		*ft_buf_to_str(int fd)
 {
 	char	buf;
@@ -36,10 +38,12 @@ static char		*ft_buf_to_str(int fd)
 
 	i = 0;
 	reead = read(fd, &buf, 1);
-	if (!(str = (char *)malloc(sizeof(char) * 500)))
+	if (!(str = (char *)malloc(sizeof(char) * (21 * 26 + 1))))
 		return (NULL);
 	while (reead == 1 && buf != '\0')
 	{
+	//if (!(str = (char *)malloc(sizeof(char) * i)))
+	//	return (NULL);
 		str[i] = buf;
 		i++;
 		reead = read(fd, &buf, 1);
@@ -50,45 +54,35 @@ static char		*ft_buf_to_str(int fd)
 
 static char		**ft_str_to_tab(char *str)
 {
-	size_t		i;
+	unsigned int		i;
 	size_t		j;
 	size_t		k;
-	size_t			count;
 	char		**new_str;
 
-	count = 0;
 	i = 0;
 	k = 0;
 	j = 0;
-	if (!(new_str = (char **)malloc(sizeof(char *) * (ft_strlen(str) + 13))))
+	if (str[ft_strlen(str) - 2] != '#' && str[ft_strlen(str) - 2] != '.')
+	{
+		write(1, "Erreur de map", 13);
+		exit(EXIT_FAILURE);
+	}
+	if (!(new_str = (char **)malloc(sizeof(char *) * (ft_strlen(str)))))
 		return (NULL);
-	while (i < ft_strlen(str))
+	while (str[i])
 	{
 		new_str[j] = ft_strsub(str, i, 20);
-	//	printf("%s", new_str[j]);
-		//write(1, "a", 1);
 		j++;
 		i = i + 21;
-		/*if (i == 0)
-		{
-			count = 20;
-			//printf("%s", str);
-			new_str[j] = ft_strsub(str, i, count);
-			printf("%s", new_str[j]);
-			count = 0;
-			j = 1;
-		}
-		if (count == 21)
-		{
-			new_str[j++] = ft_strsub(str, i - count, 20);
-			count = 0;
-			printf("%s", new_str[j--]);
-	//		write(1, "a", 1);
-		}
-		i++;
-		count++;*/
+		printf("%s", new_str[j]);
 	}
-	//printf("%zu", count);
+	if (j > 26)
+	{
+		write(1, "Trop de tetriminos", 19);
+		exit(EXIT_FAILURE);
+	}
+	new_str[j] = NULL;
+	free(str);
 	return (new_str);
 }
 
@@ -103,9 +97,9 @@ static char		**ft_str_split_nl(char **tab)
 	i = 0;
 	k = 0;
 	j = 0;
-	if (!(str = (char *)malloc(sizeof(char) * 5000)))
+	if (!(str = (char *)malloc(sizeof(char) * 50)))
 		return (NULL);
-	if (!(new_tab = (char **)malloc(sizeof(char *) * 5000)))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * ft_strlen(str) + (27 * 21 + 1))))
 		return (NULL);
 	while (tab[j])
 	{
@@ -121,6 +115,7 @@ static char		**ft_str_split_nl(char **tab)
 		}
 		new_tab[j++] = ft_strsub(str, 0, ft_strlen(str));
 	}
+	free(str);
 	return (new_tab);
 }
 
@@ -129,8 +124,9 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	char	**ret;
-	char	**new_ret;
-	char	*str;
+//	char	**new_ret;
+	//char	*str;
+	//t_list	tetriminos;
 	int		fd;
 	int		index;
 	int		i;
@@ -138,26 +134,21 @@ int		main(int ac, char **av)
 	i = 0;
 	index = 0;
 	fd = open(av[1], O_RDONLY);
-
+	//str = ft_buf_to_str(fd);
 	ret = ft_str_to_tab(ft_buf_to_str(fd));
-	if (i != 1)
-		write(1, "b", 1);
-	i = ft_tab_check_tetri(ret);
-	if (i != 1)
-	{
-		write(1, "a", 1);
-		exit(EXIT_FAILURE);
-	}
-	new_ret = ft_str_split_nl(ret);
-	new_ret = ft_split_dots(new_ret);
-	ft_erreurs(new_ret);
-	i = ft_check_backslash(ft_str_to_tab(ft_buf_to_str(fd)));
-	printf("%d", i);
+//	i = ft_tab_check_tetri(ret);
+//	if (i != 1)
+//	{
+//		write(1, "a", 1);
+//		exit(EXIT_FAILURE);
+//	}
+//	new_ret = ft_str_split_nl(ret);
+//	new_ret = ft_split_dots(new_ret);
+//	ft_erreurs(new_ret);
+	//printf("%s", ft_tab_to_list(ret));
 	while (ret[index])
 	{
-		write(1, "n", 1);
-		printf("%s", ret[index]);
-		printf("%s\n", new_ret[index]);
+		printf("%s\n", ret[index]);
 		index++;
 	}
 	return (0);
