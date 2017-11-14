@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:23:12 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/13 19:37:56 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/14 15:12:20 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static char		**ft_str_split_nl(char **tab)
 	free(str);
 	return (new_tab);
 }
-/*
+
 int		main(int ac, char **av)
 {
 	if (ac != 2)
@@ -151,4 +151,4 @@ int		main(int ac, char **av)
 		index++;
 	}
 	return (0);
-}*/
+}

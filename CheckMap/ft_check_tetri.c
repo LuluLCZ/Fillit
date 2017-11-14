@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:52:27 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/13 14:48:11 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/14 15:11:51 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ static int		ft_check_valide(char *str)
 	(ft_strcmp(str, S13)) == 0 ? i++ : i;
 	(ft_strcmp(str, S14)) == 0 ? i++ : i;
 	(ft_strcmp(str, S15)) == 0 ? i++ : i;
+	(ft_strcmp(str, S16)) == 0 ? i++ : i;
+	(ft_strcmp(str, S17)) == 0 ? i++ : i;
+	(ft_strcmp(str, S18)) == 0 ? i++ : i;
+	(ft_strcmp(str, S19)) == 0 ? i++ : i;
 	return (i);
 }
 

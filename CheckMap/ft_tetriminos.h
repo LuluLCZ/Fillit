@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 18:05:52 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/13 15:37:44 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/14 18:54:54 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@
 # define S13 "####"
 # define S14 "###.#"
 # define S15 "#...###"
-
+# define S16 "#..##...#"
+# define S17 "#...##..#"
+# define S18 "#..###"
+# define S19 "###..#"
 
 typedef struct		s_list
 {
@@ -40,6 +43,20 @@ typedef struct		s_list
 	size_t				content_size;
 	struct s_list		*next;
 }					t_list;
+
+typedef struct		ListeRepere
+{
+	t_list				*first;
+	t_list				*last;
+	int					len;
+}					Liste;
+
+typedef struct		s_coordonnees
+{
+	int		*ordonnees;
+	int		*abcisse;
+}					t_coord;
+
 
 static char		*ft_buf_to_str(int fd);
 static char		**ft_str_to_tab(char *str);
