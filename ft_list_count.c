@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:34 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/14 15:01:32 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/16 18:39:44 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #include "CheckMap/Libft/ft_lstadd.c"
 #include "CheckMap/Libft/ft_strcpy.c"
 
-void		initialisation(Liste *liste)
+void		initialisation(Liste *Liste)
 {
 	liste->first = NULL;
 	liste->last = NULL;

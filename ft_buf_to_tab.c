@@ -6,7 +6,7 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:23:12 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/14 17:54:48 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/16 21:58:41 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ static char		**ft_str_split_nl(char **tab)
 	i = 0;
 	k = 0;
 	j = 0;
-	if (!(str = (char *)malloc(sizeof(char) * 500)))
+	if (!(str = (char *)malloc(sizeof(char) * 50)))
 		return (NULL);
-	if (!(new_tab = (char **)malloc(sizeof(char *) * ft_strlen(str) + (27 * 21 + 1))))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * ft_strlen(str) + (27 * 21))))
 		return (NULL);
 	while (tab[j])
 	{
@@ -112,13 +112,12 @@ static char		**ft_str_split_nl(char **tab)
 			while (tab[j][i] == '\n')
 				i++;
 		}
-		new_tab[j] = ft_strsub(str, 0, ft_strlen(str) - 1);
-		j++;
+		new_tab[j++] = ft_strsub(str, 0, ft_strlen(str) - 2);
 	}
 	free(str);
 	return (new_tab);
 }
-/*
+
 int		main(int ac, char **av)
 {
 	if (ac != 2)
@@ -143,7 +142,7 @@ int		main(int ac, char **av)
 	}
 	new_ret = ft_str_split_nl(ret);
 	new_ret = ft_split_dots(new_ret);
-	ft_erreurs(new_ret);
+	//ft_erreurs(new_ret);
 	//printf("%d", i);
 	while (ret[index])
 	{
@@ -152,4 +151,4 @@ int		main(int ac, char **av)
 		index++;
 	}
 	return (0);
-}*/
+}

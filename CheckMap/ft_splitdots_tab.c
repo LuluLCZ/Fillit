@@ -6,7 +6,7 @@
 /*   By: llacaze <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:00:39 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/12 17:10:50 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/16 22:18:55 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char		**ft_split_dots(char **tab)
 	j = 0;
 	i = 0;
 	start = 0;
-	if (!(new_tab = (char **)malloc(sizeof(char *) * 5000)))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * (27 * 25 + 1))))
 		return (NULL);
 	while (tab[j])
 	{
@@ -50,6 +50,7 @@ static char		**ft_split_dots(char **tab)
 			i++;
 		start = i;
 		new_tab[j] = ft_strsub(tab[j], start, ft_end_sharp(tab[j]) - start + 1);
+		printf("%s", new_tab[j]);
 		j++;
 		i = 0;
 	}

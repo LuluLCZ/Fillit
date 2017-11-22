@@ -6,18 +6,18 @@
 /*   By: llacaze <llacaze@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:23:12 by llacaze           #+#    #+#             */
-/*   Updated: 2017/11/16 22:12:40 by llacaze          ###   ########.fr       */
+/*   Updated: 2017/11/14 17:54:48 by llacaze          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_tetriminos.h"
+#include "CheckMap/ft_tetriminos.h"
 
-#include "Libft/ft_strcmp.c"
-#include "Libft/ft_strsub.c"
-#include "Libft/ft_strlen.c"
-#include "ft_splitdots_tab.c"
-#include "ft_check_tetri.c"
-#include "Libft/ft_strnew.c"
+#include "CheckMap/Libft/ft_strcmp.c"
+#include "CheckMap/Libft/ft_strsub.c"
+#include "CheckMap/Libft/ft_strlen.c"
+#include "CheckMap/ft_splitdots_tab.c"
+#include "CheckMap/ft_check_tetri.c"
+#include "CheckMap/Libft/ft_strnew.c"
 
 /*static int		ft_check_valide(char *str);
 
@@ -96,7 +96,7 @@ static char		**ft_str_split_nl(char **tab)
 	i = 0;
 	k = 0;
 	j = 0;
-	if (!(str = (char *)malloc(sizeof(char) * 50)))
+	if (!(str = (char *)malloc(sizeof(char) * 500)))
 		return (NULL);
 	if (!(new_tab = (char **)malloc(sizeof(char *) * ft_strlen(str) + (27 * 21 + 1))))
 		return (NULL);
@@ -112,12 +112,13 @@ static char		**ft_str_split_nl(char **tab)
 			while (tab[j][i] == '\n')
 				i++;
 		}
-		new_tab[j++] = ft_strsub(str, 0, ft_strlen(str));
+		new_tab[j] = ft_strsub(str, 0, ft_strlen(str) - 1);
+		j++;
 	}
 	free(str);
 	return (new_tab);
 }
-
+/*
 int		main(int ac, char **av)
 {
 	if (ac != 2)
@@ -141,16 +142,14 @@ int		main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	new_ret = ft_str_split_nl(ret);
-
 	new_ret = ft_split_dots(new_ret);
-
 	ft_erreurs(new_ret);
 	//printf("%d", i);
-	//while (ret[index])
-	//{
-	//	printf("%s\n", ret[index]);
-	//	printf("%s\n", new_ret[index]);
-	//	index++;
-	//}
+	while (ret[index])
+	{
+		printf("%s\n", ret[index]);
+		printf("%s\n", new_ret[index]);
+		index++;
+	}
 	return (0);
-}
+}*/
